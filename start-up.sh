@@ -8,13 +8,13 @@ GAMES_DIRECTORY="${HOME_PATH}/arcade-machine/games"
 #Update package lists, install curl and git using distro specific package manager
 if [ -f /etc/debian_version ]; then
     sudo apt-get update --assume-yes
-    sudo apt-get install curl git $SKM_DEPENDENCIES --assume-yes
+    sudo apt-get install curl git --assume-yes
 elif [ -f /etc/redhat-release ]; then
     sudo yum check-update
-    sudo yum install curl git $SKM_DEPENDENCIES
+    sudo yum install curl git
 elif [ -f /etc/arch-release ]; then
     sudo pacman -Sy
-    sudo pacman -S curl git $SKM_DEPENDENCIES
+    sudo pacman -S curl git
 else
     echo "Unsupported distro"
     exit 1
