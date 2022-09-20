@@ -1,22 +1,20 @@
 #!/bin/bash
 GIT_ARCADE_MACHINE_REPO=https://github.com/thoth-tech/arcade-machine
 
-SKM_DEPENDENCIES="clang libsdl2-dev libsdl2-gfx-dev libsdl2-mixer-dev libsdl2-ttf-dev libsdl2-net-dev libsdl2-image-dev libncurses-dev libpng-dev libcurl4-openssl-dev libbz2-dev libflac-dev libvorbis-dev libmikmod-dev libwebp-dev libfreetype6-dev cmake"
-
 HOME_PATH=~
 INSTALL_PATH="${HOME_PATH}/arcade-machine"
 GAMES_DIRECTORY="${HOME_PATH}/arcade-machine/games"
 
-#Update package lists, install curl and git and skm dependencies using distro specific package manager
+#Update package lists, install curl and git using distro specific package manager
 if [ -f /etc/debian_version ]; then
     sudo apt-get update --assume-yes
-    sudo apt-get install curl git $SKM_DEPENDENCIES --assume-yes
+    sudo apt-get install curl git --assume-yes
 elif [ -f /etc/redhat-release ]; then
     sudo yum check-update
-    sudo yum install curl git $SKM_DEPENDENCIES
+    sudo yum install curl git
 elif [ -f /etc/arch-release ]; then
     sudo pacman -Sy
-    sudo pacman -S curl git $SKM_DEPENDENCIES
+    sudo pacman -S curl git
 else
     echo "Unsupported distro"
     exit 1
@@ -36,8 +34,6 @@ fi
 
 # Update the environment variable LD_LIBRARY_PATH to source the object file.
 export LD_LIBRARY_PATH=$HOME/.splashkit/source
-
-
 
 # Clone arcade machine repo if it doesn't exist, pull the code if it does
 if [ ! -d "${INSTALL_PATH}" ]; then
@@ -72,10 +68,6 @@ fi
     cd $INSTALL_PATH
     # Build the Arcade Machine
     make 
-    # OR
-    #skm g++ src/* -Iinclude -lstdc++fs -o test
-
-    # skm clang++ Program.cpp -Iinclude -lstdc++fs -o arcade-machine
 )
 
 # Run the arcade machine
