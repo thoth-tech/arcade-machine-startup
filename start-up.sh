@@ -37,7 +37,7 @@ export LD_LIBRARY_PATH=$HOME/.splashkit/source
 
 # Clone arcade machine repo if it doesn't exist, pull the code if it does
 if [ ! -d "${INSTALL_PATH}" ]; then
-    git clone --depth 1 --branch master $GIT_ARCADE_MACHINE_REPO "${INSTALL_PATH}"
+    git clone --depth 1 --branch main $GIT_ARCADE_MACHINE_REPO "${INSTALL_PATH}"
     exit 1
 elif [ -d "${INSTALL_PATH}" ]; then
     cd $INSTALL_PATH
