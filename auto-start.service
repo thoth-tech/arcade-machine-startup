@@ -1,0 +1,24 @@
+# Place in /etc/systemd/system
+
+# Basic Service Manipulation commands:
+# systemctl stop auto-start.service
+# systemctl start auto-start.service
+# systemctl restart auto-start.service
+# systemctl status auto-start.service
+
+# View SystemD Logs:
+# journalctl -u auto-start.service
+
+[Unit]
+Description=example systemd service unit file.
+
+
+[Service]
+RemainAfterExit=True
+ExecStartPre=/bin/sleep 30
+User=pi
+Group=sudo
+ExecStart=/bin/bash /home/pi/arcade-machine-startup/start-up.sh
+
+[Install]
+WantedBy=default.target
